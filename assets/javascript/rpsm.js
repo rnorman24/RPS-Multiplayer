@@ -11,3 +11,9 @@ var config = {
 firebase.initializeApp(config);
 
 const database = firebase.initializeApp(config);
+
+// Initial Values
+let name = '';
+let wins = 0;
+let losses = 0;
+let turn = 1;
