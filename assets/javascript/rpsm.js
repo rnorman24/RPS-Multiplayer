@@ -65,11 +65,6 @@ connections.once('value', function (snapshot) {
 });
 
 
-    // Make player connection to Firebase and send info.
-    // When player disconnects, remove from database.
-    // If 1 and 2 were taken, remove name from form and disconnect from Firebase.
-
-
 // Ongoing event listening.
   // If both platers connected update the latest info about your opponent and also yourself.
   // If we have a name for our opponent,
