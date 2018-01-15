@@ -63,9 +63,8 @@ connections.once('value', function (snapshot) {
     app.delete();
   }
 });
-
-
 // Ongoing event listening.
+
   // If both platers connected update the latest info about your opponent and also yourself.
   // If we have a name for our opponent,
   // Show the opponent and update the opponents info.
