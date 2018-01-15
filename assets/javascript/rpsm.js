@@ -39,15 +39,32 @@ let opponent = {
 
 // Initial connection to Firebase/presence handling.
 connections.once('value', function (snapshot) {
-  // Check if connection '1' exists, -1 indicates no connection
+  // Check if connection '1' and/or '2' exists, -1 indicates no connection.
   if (Object.keys(snapshot.val()).indexOf('1') === -1) {
     player.number = '1';
     opponent.number = '2';
+  } else if (Object.keys(snapshot.val()).indexOf('2') === -1) {
+    player.number = '2';
+    opponent.number = '1';
   }
-})
-  // Check if any players exist.
-  // If no players exist add player 1.
-  // If player exists add player 2,
+  // If you got a player number, you're 1 or 2.
+  if (player.number !== "0") {
+    // Make player connection to Firebase and send info.
+    con = connections.child(player.number);
+    con.set(player);
+    // When I disconnect, remove this device.
+    con.onDisconnect().remove();
+    // If 1 and 2 were taken, your number is still 0.
+  } else {
+    // Remove the name form and put the alert there.
+    $('section').remove();
+    $('.alert').show();
+    // And disconnect from Firebase.
+    app.delete();
+  }
+});
+
+
     // Make player connection to Firebase and send info.
     // When player disconnects, remove from database.
     // If 1 and 2 were taken, remove name from form and disconnect from Firebase.

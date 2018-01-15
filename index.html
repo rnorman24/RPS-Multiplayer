@@ -22,16 +22,18 @@
 <body>
 
   <div class="container">
-    <h1>Rock Paper Scissors</h1>
-
-    <div id="state">
+    <header>
+      <h1>Rock Paper Scissors</h1>
+      <h2 class="alert alert-danger">Error: Two players are already playing. Please come back later.</h2>
+    </header>
+    <section id="state">
       <div class="input-group mb-3">
         <input type="text" class="form-control" placeholder="Name">
         <div class="input-group-append">
           <button class="btn btn-outline-secondary" type="button">Start</button>
         </div>
       </div>
-    </div>
+    </section>
 
     <div id="game">
 

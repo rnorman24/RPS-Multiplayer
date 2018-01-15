@@ -23,3 +23,8 @@ h1 {
 .msg-dspl {
   margin: 0 10rem;
 }
+
+.alert {
+    display: none;
+    text-align: center;
+}
