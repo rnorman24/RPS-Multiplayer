@@ -20,36 +20,43 @@ let turn = 1;
 
 // -----------------------------
 
-// connectionsRef references a specific location in our database.
-// All of our connections will be stored in this directory.
-var connectionsRef = database.ref("/connections");
+// Initial connection to Firebase/presence handling.
+  // Check if any players exist.
+  // If no players exist add player 1.
+  // If player exists add player 2,
+    // Make player connection to Firebase and send info.
+    // When player disconnects, remove from database.
+    // If 1 and 2 were taken, remove name from form and disconnect from Firebase.
 
-// '.info/connected' is a special location provided by Firebase that is updated
-// every time the client's connection state changes.
-// '.info/connected' is a boolean value, true if the client is connected and false if they are not.
-var connectedRef = database.ref(".info/connected");
 
-// When the client's connection state changes...
-connectedRef.on("value", function(snap) {
+// Ongoing event listening.
+  // If both platers connected update the latest info about your opponent and also yourself.
+  // If we have a name for our opponent,
+  // Show the opponent and update the opponents info.
+  // Once both players have a name,
+    // Check each time whether the players have made selections.
+    // If both have picked, run comparison on choices for winner.
+      // If player 1 hasn't chosen yet, show them their options.
+      // Otherwise player 2 must be the one who hasn't made a choice yet.
 
-  // If they are connected..
-  if (snap.val()) {
 
-    // Add user to the connections list.
-    var con = connectionsRef.push(true);
-    // Remove user from the connection list when they disconnect.
-    con.onDisconnect().remove();
-  }
-});
+// On-click function for submitting a name.
 
-connectionsRef.on("value", function(snap) {
 
-  // Display the players in the html.
+// Functions for changing HTML elements.
 
-});
 
-// Add player 1
+// On-click function for selecting R, P, or S.
 
-// Add player 2
 
-// Play Game
+// On-click function for submitting a chat.
+
+
+// Database listening function for chats.
+
+
+// Win-Loss-Draw logic.
+  // If there was a winner,
+    // Then update your own win/loss count.
+    // Then show the win.
+    // Else, show the draw.
