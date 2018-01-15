@@ -16,7 +16,7 @@ const database = firebase.initializeApp(config);
 let name = '';
 let wins = 0;
 let losses = 0;
-let turn = 1;
+let turns = 0;
 
 // -----------------------------
 
