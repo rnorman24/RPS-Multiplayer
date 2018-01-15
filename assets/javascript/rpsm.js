@@ -1,4 +1,6 @@
 
+$(document).ready(function () {
+
 // Initialize Firebase
 var config = {
   apiKey: "AIzaSyDx0AWYiagYCV-KrEwLWdAqHouA8DEpRqA",
@@ -8,19 +10,41 @@ var config = {
   storageBucket: "rpsm-176e3.appspot.com",
   messagingSenderId: "1085251346690"
 };
-firebase.initializeApp(config);
+const app = firebase.initializeApp(config);
 
-const database = firebase.initializeApp(config);
+const database = firebase.database();
+const chats = database.ref('chat');
+const connections = database.ref('connections');
 
-// Initial Values
-let name = '';
-let wins = 0;
-let losses = 0;
-let turns = 0;
+// Initial player/opponent values
+let con;
+let player = {
+  number: '0',
+  name: '',
+  wins: 0,
+  losses: 0,
+  turns: 0,
+  choice: ''
+}
+let opponent = {
+  number: '0',
+  name: '',
+  wins: 0,
+  losses: 0,
+  turns: 0,
+  choice: ''
+}
 
 // -----------------------------
 
 // Initial connection to Firebase/presence handling.
+connections.once('value', function (snapshot) {
+  // Check if connection '1' exists, -1 indicates no connection
+  if (Object.keys(snapshot.val()).indexOf('1') === -1) {
+    player.number = '1';
+    opponent.number = '2';
+  }
+})
   // Check if any players exist.
   // If no players exist add player 1.
   // If player exists add player 2,
@@ -60,3 +84,5 @@ let turns = 0;
     // Then update your own win/loss count.
     // Then show the win.
     // Else, show the draw.
+
+});
