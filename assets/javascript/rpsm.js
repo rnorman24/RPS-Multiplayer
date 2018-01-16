@@ -72,13 +72,15 @@ connections.on('value', function (snapshot) {
       // Gather the latest info your opponent and also yourself.
       opponent = snapshot.val()[opponent.number];
       player = snapshot.val()[player.number];
-      
+      // If we have a name for our opponent,
+      if (opponent.name.length > 0) {
+        // Show the opponent. This also updates the opponents info over time.
+        DOMFunctions.showOpponentInfo();
+      }
     }
   }
 })
-  // If both platers connected update the latest info about your opponent and also yourself.
-  // If we have a name for our opponent,
-  // Show the opponent and update the opponents info.
+
   // Once both players have a name,
     // Check each time whether the players have made selections.
     // If both have picked, run comparison on choices for winner.
