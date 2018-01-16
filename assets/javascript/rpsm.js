@@ -64,7 +64,18 @@ connections.once('value', function (snapshot) {
   }
 });
 // Ongoing event listening.
-
+connections.on('value', function (snapshot) {
+  // If the player is connected,
+  if (con) {
+    // And an opponent is connected,
+    if (Object.keys(snapshot.val()).indexOf(opponent.number) !== -1) {
+      // Gather the latest info your opponent and also yourself.
+      opponent = snapshot.val()[opponent.number];
+      player = snapshot.val()[player.number];
+      
+    }
+  }
+})
   // If both platers connected update the latest info about your opponent and also yourself.
   // If we have a name for our opponent,
   // Show the opponent and update the opponents info.
