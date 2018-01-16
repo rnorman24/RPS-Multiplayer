@@ -76,18 +76,32 @@ connections.on('value', function (snapshot) {
       if (opponent.name.length > 0) {
         // Show the opponent. This also updates the opponents info over time.
         DOMFunctions.showOpponentInfo();
+        // Once both players have a name,
+        if (player.name.length > 0) {
+          // Check each time whether the players have made selections.
+          let choice1 = snapshot.val()['1'].choice;
+          let choice2 = snapshot.val()['2'].choice;
+          let turns1 = snapshot.val()['1'].turns;
+          // If both have picked, run getWinner on those choices.
+          if (choice1.length > 0 && choice2.length > 0) {
+            getWinner(choice1, choice2);
+            // If player 1 hasn't chosen yet, show them their options.
+          } else if (choice1.length === 0 && turns1 === 0) {
+            DOMFunctions.showMoveOptions('1');
+            // Otherwise player 2 must be the one who hasn't make a choice yet.
+          } else if (choice1.length > 0 && choice2.length === 0) {
+            DOMFunctions.showMoveOptions('2');
+          }
+        }
       }
+    } else if (opponent.name.length > 0 && Object.keys(snapshot.val()).indexOf(opponent.number) === -1) {
+      $('.turn').text('Opponent left. Waiting for new opponent.');
+      $('.wating-' + opponent.number).show();
+      $('.name-' + opponent.number).empty();
+      $('.win-loss-' + opponent.number). empty();
     }
   }
-})
-
-  // Once both players have a name,
-    // Check each time whether the players have made selections.
-    // If both have picked, run comparison on choices for winner.
-      // If player 1 hasn't chosen yet, show them their options.
-      // Otherwise player 2 must be the one who hasn't made a choice yet.
-
-
+});
 // On-click function for submitting a name.
 
 
